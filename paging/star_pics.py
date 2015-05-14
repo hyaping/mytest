@@ -35,7 +35,7 @@ def get_users_count(session,pagesize = 20):
     return result
 
 def renderweb(makol,**datas):
-    tl=TemplateLookup(directories=['/home/dev/mytest'],module_directory='/home/dev/mytest',output_encoding='utf-8')
+    tl=TemplateLookup(directories=['/home/dev/mytest/paging'],module_directory='/home/dev/mytest/paging',output_encoding='utf-8')
     a=tl.get_template(makol)
     return a.render(**datas)
 
