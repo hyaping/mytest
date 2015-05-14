@@ -1,0 +1,14 @@
+# -*- coding:utf-8 -*-
+<!DOCTYPE html>
+<html>
+    <head><title>明星图展示</title>
+    <body>
+        % for i in ls:
+        <a href="http://www.1905.com${i.href}" rtarget="_blank">
+          <img src="${i.src}" width=75 heigh=100 hspace=20 vspace=20 alian=bottom></a>
+        <a href='http://www.1905.com${i.href}'>${i.name}</a>
+        % endfor
+        <div>${pages}</div>
+    <body>
+    </head>
+</html>
