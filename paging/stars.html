@@ -1,0 +1,23 @@
+# -*- coding:utf-8 -*-
+<!DOCTYPE html>
+<html>
+    <head><title>明星图展示</title></head>
+    <body>
+        % for i in ls:
+        <a href="http://www.1905.com${i.href}" rtarget="_blank">
+          <img src="${i.src}" width=75 heigh=100 hspace=20 vspace=20 alian=bottom></a>
+        <a href='http://www.1905.com${i.href}'>${i.name}</a>
+        % endfor
+        <div>
+            % if cur_page!=1:
+             <a href="/stars?pageindex=${cur_page-1}">上一页</a>
+            %endif
+            % for pageidx in page_idx_list:
+                <a href="/stars?pageindex=${pageidx}">${pageidx}</a>
+            %endfor
+            % if cur_page!=_page_count:
+                <a href="/stars?pageindex=${cur_page+1}">下一页</a>
+            %endif
+        </div>
+    <body>
+</html>

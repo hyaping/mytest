@@ -68,14 +68,6 @@ class Pager:
                     start_idx = end_idx - 9
         page_idx_list = pageidxs[start_idx-1:end_idx] if pageidxs else []
         return page_idx_list
-        #urls= []
-        #if self.cur_page!=1:
-         #   urls.append(self.url.format(int(self.cur_page-1),"上一页"))
-       # for pageidx in page_idx_list:
-        #    urls.append(self.url.format(pageidx,pageidx))
-        #if self.cur_page!=_page_count:
-        #    urls.append(self.url.format(int(self.cur_page+1),"下一页"))
-        #return "".join(urls)
 
 class Star_picsHandler(tornado.web.RequestHandler):
     def get(self):
