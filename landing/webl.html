@@ -1,0 +1,13 @@
+# -*- coding:utf-8 -*-
+<head>
+<title>明星图</title>
+<body>
+    <p><a href='/changepasswd'>修改密码</a></p>
+    % for i in ls:
+        <a>
+         <img src="${i.src}" width=75 heigh=100 hspace=20 vspace=20 alian=bottom>  
+        </a>
+        <a href='http://www.1905.com${i.href}'>${i.name}</a>
+    % endfor
+<body>
+</head>

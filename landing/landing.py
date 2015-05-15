@@ -18,11 +18,11 @@ DBSession=sessionmaker(bind=engine)
 session=DBSession()
 
 class User(Base):
-    __tablename__='tweb'
+    __tablename__='pics'
     id=Column(Integer,primary_key=True)
-    name=Column(String(20))
-    img_url=Column(String(20))
-    page_url=Column(String(20))
+    name=Column(String(255))
+    src=Column(String(255))
+    href=Column(String(255))
 
 class Users(Base):
     __tablename__='USERS'
@@ -68,7 +68,7 @@ class selectHandler(tornado.web.RequestHandler):
     def get(self):
         session = DBSession()
         result = get_users(session)
-        self.write(renderweb('webl.txt',result))
+        self.write(renderweb('webl.html',result))
     def post(self):
         self.redirect('/changepasswd')
 
@@ -95,12 +95,8 @@ class LandingHandler(tornado.web.RequestHandler):
     def post(self):
         namel=self.get_argument('username')
         passwdl=self.get_argument('passwd')
-        print namel
-        print passwdl
         name=get_user_by_name(session,namel)
         passwd=get_user_by_password(session,passwdl)
-        print name
-        print passwd
         if name:
             if passwd:
                 self.redirect('/select')
