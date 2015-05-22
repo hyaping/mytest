@@ -1,0 +1,32 @@
+#-*- coding:utf-8 -*-
+<!DOCTYPE html>
+<html>
+    <head><title>各队球星</title></head>
+    <body>
+        %for j in players:
+        <a href='/players?teams=${j[1]}'>&nbsp;${j[1]}&nbsp;</a>
+        %endfor
+        <div>
+            % if cur_page!=1:
+            <a href='/players?teams=${team}&pageindex=${cur_page-1}'>&nbsp;上一页&nbsp;</a>
+            %endif
+            % for pageidx in pageidxs:
+            <a href='/players?teams=${team}&pageindex=${pageidx}'>&nbsp;${pageidx}&nbsp;</a>
+            %endfor
+            %if cur_page!=_page_count:
+            <a href='/players?teams=${team}&pageindex=${cur_page+1}'>&nbsp;下一页&nbsp;</a>
+            %endif
+        </div> 
+        <table>
+            <tr>
+            <td>队名</td><td>姓名</td><td>号码</td><td>位置</td><td>身高</td>
+            <td>体重</td><td>生日</td><td>合同</td>
+            </tr>
+        % for i in player_datas:
+            <tr>
+            <td>${i.team_name}</td><td><a href='http://g.hupu.com/'${i.href}>${i.name}</a></td><td>${i.size}</td><td>${i.site}</td><td>${i.height}</td><td>${i.weight}</td><td>${i.birthday}</td><td>${i.contract}</td>
+            </tr>   
+         %endfor
+        </table>
+    </body>
+</html>            
