@@ -37,6 +37,12 @@ class Ball(Base):
     birthday=Column(String(255))
     contract=Column(String(255))
 
+def get_all_users(session,offset=0,limit=10):
+    all_users=session.query(Ball).offset(offset).limit(limit).all()
+    return all_users
+
+def get_all(session):
+    return session.query(Ball).all()
 def get_users(session):
     players=session.query(Ball.teamname).all()
     return players
@@ -68,14 +74,6 @@ class Pager:
         _page_count=self.get_page_count()
         pageidxs=range(1,_page_count+1)
         return pageidxs
-        #urls=[]
-        #if self.cur_page!=1:
-         #   urls.append(self.url.format(int(self.cur_page-1),"上一页"))
-        #for pageidx in page_idx_list:
-        #    urls.append(self.url.format(pageidx,pageidx))
-        #if self.cur_page!=_page_count:
-        #    url.append(self.url.format(int(self.cur_page+1),"下一页"))
-        #return "".join(urls)
 
 def renderweb(makol,**datas):
     tl=TemplateLookup(directories=['/home/dev/mytest/player'],
@@ -89,11 +87,20 @@ class PlayersHandler(tornado.web.RequestHandler):
         team=self.get_argument('teams','')
         pageindex = int(self.get_argument("pageindex",1))
         page_size = 10
-        totals=get_total_by_team(session,team)
-        total_count = totals.count()
-        page = Pager(total_count=total_count,page_size=page_size,cur_page=pageindex)
-        player_datas=get_users_by_team(session,team,offset=page.get_record_index(),limit=page_size)
-        pages = page.getPage()
+        if team:
+            totals=get_total_by_team(session,team)
+            print totals
+            print type(totals)
+            total_count = totals.count()
+            page= Pager(total_count=total_count,page_size=page_size,cur_page=pageindex)
+            player_datas=get_users_by_team(session,team,offset=page.get_record_index(),limit=page_size)
+            pages=page.getPage()
+        else:
+            totals=get_all(session)
+            total_count = len(totals)
+            page= Pager(total_count=total_count,page_size=page_size,cur_page=pageindex)
+            player_datas=get_all_users(session,offset=page.get_record_index(),limit=page_size)
+            pages=page.getPage()
         webl=renderweb('player.html',players=players,player_datas=player_datas,team=team,cur_page=page.cur_page,_page_count=page.get_page_count(),pageidxs=pages)
         self.write(webl)
 

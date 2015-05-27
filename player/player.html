@@ -3,15 +3,18 @@
 <html>
     <head><title>各队球星</title></head>
     <body>
+        <div>
+        <a href='/players'>&nbsp;全部&nbsp;</a>
         %for j in players:
         <a href='/players?teams=${j[1]}'>&nbsp;${j[1]}&nbsp;</a>
         %endfor
+        </div>
         <div>
             % if cur_page!=1:
             <a href='/players?teams=${team}&pageindex=${cur_page-1}'>&nbsp;上一页&nbsp;</a>
             %endif
             % for pageidx in pageidxs:
-            <a href='/players?teams=${team}&pageindex=${pageidx}'>&nbsp;${pageidx}&nbsp;</a>
+            <a href='/players?pageindex=${pageidx}'>&nbsp;${pageidx}&nbsp;</a>
             %endfor
             %if cur_page!=_page_count:
             <a href='/players?teams=${team}&pageindex=${cur_page+1}'>&nbsp;下一页&nbsp;</a>
