@@ -6,7 +6,7 @@ sys.path.append('.')
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from zope.sqlalchemy import ZopeTransactionExtension
-
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
 sqlal_env = os.environ.get('product','debug')
 print 'sqlal_env:',sqlal_env
 try:

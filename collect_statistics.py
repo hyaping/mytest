@@ -3,10 +3,10 @@
 #from sqlalchemy.ext.declarative import declarative_base
 #from sqlalchemy import Integer, Column, DateTime
 #from sqlalchemy import func
-from sqlal_config import sqlal_model
-import time
-import datetime
-import transaction
+#from sqlal_config import sqlal_model
+#import time
+#import datetime
+#import transaction
 
 Base = declarative_base()
 class ThreadCollect(Base):
